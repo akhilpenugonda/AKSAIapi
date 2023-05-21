@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { toJSON } = require('./plugins');
+const { toJSON, paginate } = require('./plugins');
 
 const bookSchema = mongoose.Schema(
   {
@@ -17,7 +17,7 @@ const bookSchema = mongoose.Schema(
     },
     launchDate: {
       type: Date,
-      required: true,
+      default: Date(),
     },
     active: {
       type: Boolean,
@@ -30,7 +30,8 @@ const bookSchema = mongoose.Schema(
 );
 
 // add plugin that converts mongoose to json
-tokenSchema.plugin(toJSON);
+bookSchema.plugin(toJSON);
+bookSchema.plugin(paginate);
 
 /**
  * @typedef Book
